@@ -6,7 +6,7 @@ This sample Flutter app showcases Material 3 features in the Flutter Material li
 
 https://user-images.githubusercontent.com/36861262/166358511-43d6a30b-33fe-4680-a4d1-808f087e740e.mp4
 
-[Download Demo](https://raw.githubusercontent.com/chayanforyou/flutter_material_3_demo/master/apk/Material3-demo-v1.0.0.apk)
+[Download APK](https://raw.githubusercontent.com/chayanforyou/flutter_material_3_demo/master/apk/Material3-demo-v1.0.0.apk)
 
 # Features
 ## Icon Buttons on the Top App Bar
