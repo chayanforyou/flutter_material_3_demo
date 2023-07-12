@@ -10,6 +10,8 @@ This app also includes new M3 components such as IconButtons, Chips, TextFields,
 
 [Download APK](/apk/M3-demo.apk)
 
+You can also check the web demo from [here](https://flutter.github.io/samples/web/material_3_demo)
+
 # Features
 ## Icon Buttons on the Top App Bar
 <img src="https://user-images.githubusercontent.com/36861262/166506048-125caeb3-5d5c-4489-9029-1cb74202dd37.png" width="25"/>  Users can switch between a light or dark theme with this button.
