@@ -1,3 +1,7 @@
+// Copyright 2021 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 class ElevationScreen extends StatelessWidget {
@@ -8,37 +12,50 @@ class ElevationScreen extends StatelessWidget {
     Color shadowColor = Theme.of(context).colorScheme.shadow;
     Color surfaceTint = Theme.of(context).colorScheme.primary;
     return Expanded(
-      child: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 20, 16.0, 0),
-            child: Text(
-              'Surface Tint only',
-              style: Theme.of(context).textTheme.titleLarge,
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 20, 16.0, 0),
+              child: Text(
+                'Surface Tint Color Only',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
             ),
           ),
-          ElevationGrid(surfaceTintColor: surfaceTint),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-            child: Text(
-              'Surface Tint and Shadow',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+          ElevationGrid(
+            surfaceTintColor: surfaceTint,
+            shadowColor: Colors.transparent,
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(<Widget>[
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                child: Text(
+                  'Surface Tint Color and Shadow Color',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ]),
           ),
           ElevationGrid(
             shadowColor: shadowColor,
             surfaceTintColor: surfaceTint,
           ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
-            child: Text(
-              'Shadow only',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+          SliverList(
+            delegate: SliverChildListDelegate(<Widget>[
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                child: Text(
+                  'Shadow Color Only',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ]),
           ),
-          ElevationGrid(shadowColor: shadowColor)
+          ElevationGrid(shadowColor: shadowColor),
         ],
       ),
     );
@@ -68,18 +85,16 @@ class ElevationGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SliverPadding(
       padding: const EdgeInsets.all(8),
-      child: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth < narrowScreenWidthThreshold) {
-          return GridView.count(
-            shrinkWrap: true,
+      sliver: SliverLayoutBuilder(builder: (context, constraints) {
+        if (constraints.crossAxisExtent < narrowScreenWidthThreshold) {
+          return SliverGrid.count(
             crossAxisCount: 3,
             children: elevationCards(shadowColor, surfaceTintColor),
           );
         } else {
-          return GridView.count(
-            shrinkWrap: true,
+          return SliverGrid.count(
             crossAxisCount: 6,
             children: elevationCards(shadowColor, surfaceTintColor),
           );
@@ -113,7 +128,6 @@ class _ElevationCardState extends State<ElevationCard> {
   @override
   Widget build(BuildContext context) {
     const BorderRadius borderRadius = BorderRadius.all(Radius.circular(4.0));
-    final bool showOpacity = _elevation == widget.info.elevation;
     final Color color = Theme.of(context).colorScheme.surface;
 
     return Padding(
@@ -135,10 +149,10 @@ class _ElevationCardState extends State<ElevationCard> {
                 style: Theme.of(context).textTheme.labelMedium,
               ),
               Text(
-                '${widget.info.level.toInt()} dp',
+                '${widget.info.elevation.toInt()} dp',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
-              if (showOpacity)
+              if (widget.surfaceTint != null)
                 Expanded(
                   child: Align(
                     alignment: Alignment.bottomRight,
