@@ -11,9 +11,7 @@ This app also includes new M3 components such as IconButtons, Chips, TextFields,
 [Download APK](/apk/M3-demo.apk)
 
 ### Web Demo
-Try the live web demo: **[https://chayanforyou.github.io/flutter_material_3_demo/](https://chayanforyou.github.io/flutter_material_3_demo/)**
-
-*(Official Flutter sample web demo is also available [here](https://flutter.github.io/samples/web/material_3_demo).)*
+Try the live web demo: [https://chayanforyou.github.io/flutter_material_3_demo](https://chayanforyou.github.io/flutter_material_3_demo/)
 
 # Features
 ## Icon Buttons on the Top App Bar
